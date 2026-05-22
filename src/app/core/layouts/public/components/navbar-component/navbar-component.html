@@ -1,1 +1,40 @@
-<p>navbar-component works!</p>
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a
+    mat-tab-link
+    routerLink="/home"
+    routerLinkActive
+    [routerLinkActiveOptions]="{ exact: true }"
+    #rlaHome="routerLinkActive"
+    [active]="rlaHome.isActive"
+    >Home</a
+  >
+  <a
+    mat-tab-link
+    routerLink="/products"
+    routerLinkActive
+    #rlaProducts="routerLinkActive"
+    [active]="rlaProducts.isActive"
+  >
+    Products
+  </a>
+  <a
+    mat-tab-link
+    routerLink="/about"
+    routerLinkActive
+    #rlaAbout="routerLinkActive"
+    [active]="rlaAbout.isActive"
+  >
+    About
+  </a>
+  <a
+    mat-tab-link
+    routerLink="/contact"
+    routerLinkActive
+    #rlaContact="routerLinkActive"
+    [active]="rlaContact.isActive"
+  >
+    Contact
+  </a>
+</nav>
+
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>

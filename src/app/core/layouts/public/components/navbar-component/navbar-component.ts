@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-navbar-component',
-  imports: [],
+  imports: [MatTabsModule, RouterModule],
   templateUrl: './navbar-component.html',
   styleUrl: './navbar-component.css',
 })
