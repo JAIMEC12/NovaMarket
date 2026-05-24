@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  min-width: 480px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.row-fields {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.half {
+  flex: 1;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

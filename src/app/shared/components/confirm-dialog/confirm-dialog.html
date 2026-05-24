@@ -1,0 +1,25 @@
+<h2 mat-dialog-title class="confirm-title">
+  {{ data.title }}
+</h2>
+<mat-dialog-content>
+  <p class="confirm-message">{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    type="button"
+    [style]="'background-color: #4f47a8; color: white;'"
+    (click)="dialogRef.close(false)"
+  >
+    Cancelar
+  </button>
+  <button
+    mat-flat-button
+    color="warn"
+    type="button"
+    [style]="'background-color: #4f47a8; color: white;'"
+    (click)="dialogRef.close(true)"
+  >
+    {{ data.confirmLabel ?? 'Eliminar' }}
+  </button>
+</mat-dialog-actions>

@@ -1,1 +1,71 @@
-<p>private-layout works!</p>
+<div class="admin-wrapper">
+  <aside class="sidebar" [class.collapsed]="collapsed()">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <mat-icon>storefront</mat-icon>
+      </div>
+      @if (!collapsed()) {
+        <div class="brand-text">
+          <span class="brand-name">NovaMarket</span>
+        </div>
+      }
+    </div>
+
+    <mat-nav-list class="sidebar-nav">
+      @for (item of navItems; track item.route) {
+        <a
+          mat-list-item
+          [routerLink]="item.route"
+          routerLinkActive="active-item"
+          [matTooltip]="collapsed() ? item.label : ''"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon class="mat-icon"> {{ item.icon }} </mat-icon>
+          @if (!collapsed()) {
+            <span matListItemTitle class="mat-title">{{ item.label }}</span>
+          }
+        </a>
+      }
+    </mat-nav-list>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-divider"></div>
+      <button
+        mat-button
+        class="logout-btn"
+        (click)="logout()"
+        [matTooltip]="collapsed() ? 'Cerrar sesión' : ''"
+        matTooltipPosition="right"
+      >
+        <mat-icon>logout</mat-icon>
+        @if (!collapsed()) {
+          <span>Cerrar sesión</span>
+        }
+      </button>
+    </div>
+  </aside>
+
+  <div class="admin-content">
+    <mat-toolbar class="topbar">
+      <button mat-icon-button class="toggle-btn" (click)="toggle()">
+        <mat-icon>{{ collapsed() ? 'menu_open' : 'menu' }}</mat-icon>
+      </button>
+
+      <div class="topbar-left">
+        <span class="topbar-title">Panel de Administración</span>
+      </div>
+
+      <span class="spacer"></span>
+
+      <div class="topbar-actions">
+        <div class="admin-avatar">
+          <mat-icon>person</mat-icon>
+        </div>
+      </div>
+    </mat-toolbar>
+
+    <main class="main">
+      <router-outlet />
+    </main>
+  </div>
+</div>

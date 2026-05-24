@@ -1,1 +1,98 @@
-<p>form works!</p>
+<h2 mat-dialog-title>{{ isEdit ? 'Editar carrito' : 'Nuevo carrito' }}</h2>
+
+<mat-dialog-content>
+  @if (loadingProducts()) {
+    <div class="loading-products">
+      <mat-spinner diameter="32" />
+      <span>Cargando productos...</span>
+    </div>
+  } @else {
+    <form [formGroup]="form" class="form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>ID de usuario</mat-label>
+        <input matInput type="number" formControlName="userId" placeholder="1" />
+        <mat-icon matSuffix>person</mat-icon>
+        @if (form.get('userId')?.hasError('required') && form.get('userId')?.touched) {
+          <mat-error>El usuario es requerido</mat-error>
+        }
+        @if (form.get('userId')?.hasError('min')) {
+          <mat-error>El ID debe ser mayor a 0</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="products-section">
+        <div class="products-header">
+          <span class="products-label">Productos</span>
+          <button mat-stroked-button type="button" color="primary" (click)="addProduct()">
+            <mat-icon>add</mat-icon>
+            Agregar producto
+          </button>
+        </div>
+
+        <div formArrayName="products">
+          @for (item of productItems.controls; track $index) {
+            <div [formGroupName]="$index" class="product-item">
+              <mat-form-field appearance="outline" class="product-select">
+                <mat-label>Producto</mat-label>
+                <mat-select formControlName="productId">
+                  @for (p of availableProducts(); track p.id) {
+                    <mat-option [value]="p.id">
+                      <div class="option-content">
+                        <span class="option-title">{{ p.id }} - </span>
+                        <span class="option-title">{{ p.title }}</span>
+                      </div>
+                    </mat-option>
+                  }
+                </mat-select>
+                @if (
+                  item.get('productId')?.hasError('required') && item.get('productId')?.touched
+                ) {
+                  <mat-error>Selecciona un producto</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="product-qty">
+                <mat-label>Cantidad</mat-label>
+                <input matInput type="number" formControlName="quantity" placeholder="1" min="1" />
+                @if (item.get('quantity')?.hasError('min')) {
+                  <mat-error>Mínimo 1</mat-error>
+                }
+              </mat-form-field>
+
+              <button
+                mat-icon-button
+                type="button"
+                color="warn"
+                (click)="removeProduct($index)"
+                [disabled]="productItems.length === 1"
+                matTooltip="Eliminar"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    </form>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    type="button"
+    [style]="'background-color: #4f47a8; color: white;'"
+    (click)="onCancel()"
+  >
+    Cancelar
+  </button>
+  <button
+    mat-flat-button
+    type="submit"
+    [style]="'background-color: #4f47a8; color: white;'"
+    (click)="onSubmit()"
+    [disabled]="loadingProducts()"
+  >
+    {{ isEdit ? 'Guardar cambios' : 'Crear carrito' }}
+  </button>
+</mat-dialog-actions>

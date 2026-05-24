@@ -1,1 +1,38 @@
-<p>dashboard-component works!</p>
+<div class="dashboard">
+  <div class="page-header">
+    <h1>Dashboard</h1>
+    <p>Bienvenido al panel de administración de NovaMarket.</p>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-center">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else {
+    <div class="stats-grid">
+      <mat-card appearance="outlined" class="stat-card">
+        <mat-card-content>
+          <div class="stat-icon">
+            <mat-icon>shopping_bag</mat-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ totalProducts() }}</span>
+            <span class="stat-label">Productos</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="outlined" class="stat-card">
+        <mat-card-content>
+          <div class="stat-icon">
+            <mat-icon>shopping_cart</mat-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ totalCarts() }}</span>
+            <span class="stat-label">Carritos</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
+</div>

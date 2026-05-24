@@ -1,1 +1,67 @@
-<p>cart works!</p>
+<div class="carts-page">
+  <div class="page-header">
+    <div>
+      <h1>Carritos</h1>
+      <p>Gestiona los carritos de NovaMarket</p>
+    </div>
+    <button mat-flat-button [style]="{ backgroundColor: '#3f51b5', color: '#fff' }" (click)="openCreate()">
+      <mat-icon>add</mat-icon>
+      Nuevo carrito
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-center">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else {
+    <div class="table-container">
+      <table mat-table [dataSource]="carts()" class="carts-table">
+        <ng-container matColumnDef="userId">
+          <th mat-header-cell *matHeaderCellDef>Usuario</th>
+          <td mat-cell *matCellDef="let c">{{ c.userId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalProducts">
+          <th mat-header-cell *matHeaderCellDef>Productos</th>
+          <td mat-cell *matCellDef="let c">{{ c.totalProducts }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalQuantity">
+          <th mat-header-cell *matHeaderCellDef>Cantidad total</th>
+          <td mat-cell *matCellDef="let c">{{ c.totalQuantity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="discountedTotal">
+          <th mat-header-cell *matHeaderCellDef>Total con descuento</th>
+          <td mat-cell *matCellDef="let c" class="price">
+            {{ c.discountedTotal | currency: 'USD' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef>Total</th>
+          <td mat-cell *matCellDef="let c" class="price">{{ c.total | currency: 'USD' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let c">
+            <button mat-icon-button color="accent" (click)="openDetail(c)" matTooltip="Ver detalle">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="openEdit(c)" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="delete(c)" matTooltip="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  }
+</div>

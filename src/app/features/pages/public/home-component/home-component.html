@@ -1,1 +1,36 @@
-<p>home-component works!</p>
+<div class="hero">
+  <h1 class="hero-title">Bienvenido a NovaMarket</h1>
+</div>
+
+@if (loading()) {
+  <div class="loading-container">
+    <mat-spinner class="loading-spinner" diameter="50"></mat-spinner>
+  </div>
+}
+@if (error()) {
+  <div class="error">
+    <p>{{ error() }}</p>
+  </div>
+}
+
+@if (!loading() && !error()) {
+    <div class="product-list">
+      @for (product of products(); track product.id) {
+        <mat-card class="product-card" key="{index}">
+          <img
+            class="avatar"
+            mat-card-md-image
+            src="{{ product.thumbnail }}"
+            alt="{{ product.title }}"
+          />
+          <mat-card-header>
+            <mat-card-title>{{ product.title }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ product.description }}</p>
+            <p>Precio: ${{ product.price }}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+}

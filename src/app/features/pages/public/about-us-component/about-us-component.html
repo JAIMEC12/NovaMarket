@@ -1,1 +1,31 @@
-<p>about-us-component works!</p>
+<div class="page">
+  <div class="hero">
+    <h1>Sobre Nosotros</h1>
+    <p>Somos una tienda moderna construida con pasión por la tecnología y el buen diseño.</p>
+  </div>
+
+  <div class="content">
+    <section class="about-text">
+      <h2>¿Quiénes somos?</h2>
+      <p>
+        NovaMarket es una plataforma de comercio digital que conecta a las personas
+        con los productos que necesitan, de forma rápida, confiable y accesible.
+      </p>
+    </section>
+
+    <section class="values">
+      <h2>Nuestros Valores</h2>
+      <div class="values-list">
+        @for (value of values; track value.title) {
+          <div class="value-item">
+            <mat-icon [style.color]="value.color">{{ value.icon }}</mat-icon>
+            <div>
+              <strong>{{ value.title }}</strong>
+              <p>{{ value.desc }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+</div>

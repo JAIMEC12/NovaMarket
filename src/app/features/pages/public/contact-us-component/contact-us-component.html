@@ -1,1 +1,35 @@
-<p>contact-us-component works!</p>
+<div class="page">
+  <div class="hero">
+    <h1>Contáctanos</h1>
+    <p>Estamos aquí para ayudarte. Escríbenos cuando quieras.</p>
+  </div>
+
+  <div class="content">
+    <section class="contact-info">
+      <h2>¿Cómo encontrarnos?</h2>
+      <div class="info-list">
+        @for (item of contactInfo; track item.label) {
+          <div class="info-item">
+            <mat-icon [style.color]="item.color">{{ item.icon }}</mat-icon>
+            <div>
+              <strong>{{ item.label }}</strong>
+              <span>{{ item.value }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="social">
+      <h2>Síguenos en redes</h2>
+      <div class="social-links">
+        @for (social of socialLinks; track social.label) {
+          <a [href]="social.url" target="_blank" rel="noopener" class="social-link">
+            <mat-icon>{{ social.icon }}</mat-icon>
+            {{ social.label }}
+          </a>
+        }
+      </div>
+    </section>
+  </div>
+</div>

@@ -74,6 +74,13 @@ export const routes: Routes = [
             (m) => m.ProductsComponent,
           ),
       },
+      {
+        path: 'carts',
+        loadComponent: () =>
+          import('./features/pages/private/cart-component/pages/cart/cart').then(
+            (m) => m.CartsComponent,
+          ),
+      },
     ],
   },
   {
